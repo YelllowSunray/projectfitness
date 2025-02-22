@@ -111,6 +111,23 @@ const WorkoutLog = () => {
           ]
         }
       ]
+    },
+    {
+      date: "21/02/25",
+      sessions: [
+        {
+          time: "14:30",
+          exercises: [
+            "1x30min boxing"
+          ]
+        },
+        {
+          time: "16;00",
+          exercises: [
+            "5x8 Squat 30KG"
+          ]
+        }
+      ]
     }
   ];
 
@@ -139,7 +156,7 @@ const WorkoutLog = () => {
         <div className="space-y-4">
           {workouts
             .find((day) => day.date === activeDay)
-            ?.sessions.map((session, idx) => (
+            ?.sessions.map((session) => (
               <div
                 key={`${activeDay}-${session.time}`}
                 className="border rounded-lg p-4 bg-gray-50"
