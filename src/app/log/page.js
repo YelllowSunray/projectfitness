@@ -128,6 +128,21 @@ const WorkoutLog = () => {
           ]
         }
       ]
+    },
+    {
+      "date": "22/02/25",
+      sessions: [
+        {
+          time: "13:30",
+          exercises: [
+            "4x6 deadlift 60kg",
+            "3x8 Dip/pushups assisted -20kg",
+            "1x8 tricep extension ?",
+            "4x8 Bayesian curl 5kg",
+            "3x8 chestfly 15kg"
+          ]
+        }
+      ]
     }
   ];
 

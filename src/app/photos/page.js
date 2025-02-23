@@ -76,21 +76,24 @@ const ProgressPhotos = () => {
             {progressData.videos.map((video, index) => (
               <div 
                 key={index} 
-                className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg"
+                className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg cursor-pointer"
+                onClick={() => setSelectedVideo(video)}
               >
                 <div className="flex-1">
                   <p className="font-medium text-gray-700">Progress Video</p>
                   <p className="text-sm text-gray-500">{formatDate(video.date)}</p>
                 </div>
                 <div className="flex-shrink-0 w-64">
-                  <video
-                    controls
-                    className="w-full h-36 rounded-lg object-cover"
-                    poster={progressData.photos[0]?.path}
-                  >
-                    <source src={video.path} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                  <div className="relative pt-[56.25%]">
+                    <video
+                      controls
+                      className="absolute top-0 left-0 w-full h-full rounded-lg object-contain"
+                      poster={progressData.photos[0]?.path}
+                    >
+                      <source src={video.path} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
                 </div>
               </div>
             ))}
@@ -122,21 +125,26 @@ const ProgressPhotos = () => {
             <div className="mb-4 flex justify-between items-center">
               <h3 className="text-xl font-bold">Progress Video</h3>
               <button 
-                onClick={() => setSelectedVideo(null)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedVideo(null);
+                }}
                 className="text-gray-500 hover:text-gray-700"
               >
                 Close
               </button>
             </div>
-            <video
-              controls
-              autoPlay
-              className="w-full max-h-[70vh] rounded-lg"
-              onClick={e => e.stopPropagation()}
-            >
-              <source src={selectedVideo.path} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div className="relative pt-[100%]">
+              <video
+                controls
+                autoPlay
+                className="absolute top-0 left-0 w-full h-full rounded-lg object-contain"
+                onClick={e => e.stopPropagation()}
+              >
+                <source src={selectedVideo.path} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
         </div>
       )}
