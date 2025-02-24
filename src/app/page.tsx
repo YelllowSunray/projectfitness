@@ -6,7 +6,7 @@ const stats = [
   { name: 'Squat PR', value: '35KG', previousValue: '30KG', increase: 5 },
   { name: 'Deadlift PR', value: '60KG', previousValue: '60KG', increase: 0 },
   { name: 'BodyWeight', value: '69KG', previousValue: '68KG', increase: 1 }
-]
+];
 
 function Home() {
   return (
@@ -25,7 +25,7 @@ function Home() {
                 href="/log"
                 className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                lifting history
+                Lifting History
               </a>
               <a href="/forum" className="text-sm/6 font-semibold text-white">
                 Collaborate <span aria-hidden="true">→</span>
@@ -47,7 +47,7 @@ function Home() {
           </defs>
         </svg>
       </div>
-      <div className="bg-gray-900">
+      <div className="bg-gray-900 ">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (
@@ -55,10 +55,10 @@ function Home() {
                 <p className="text-sm/6 font-medium text-gray-400">{stat.name}</p>
                 <p className="mt-2 flex items-baseline gap-x-2">
                   <span className="text-4xl font-semibold tracking-tight text-white">{stat.value}</span>
-                  {/* Display increase with appropriate color and symbols instead of Lucide icons */}
+                  {/* Fixed color logic for weight gain/loss */}
                   <span className={`text-sm font-medium ${
                     stat.name === 'BodyWeight' 
-                      ? (stat.increase < 0 ? 'text-green-500' : stat.increase > 0 ? 'text-red-500' : 'text-gray-400')
+                      ? (stat.increase > 0 ? 'text-green-500' : stat.increase < 0 ? 'text-red-500' : 'text-gray-400')
                       : (stat.increase > 0 ? 'text-green-500' : stat.increase < 0 ? 'text-red-500' : 'text-gray-400')
                   }`}>
                     {stat.increase > 0 && '+'}{stat.increase}KG
