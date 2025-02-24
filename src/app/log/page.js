@@ -130,7 +130,7 @@ const WorkoutLog = () => {
       ]
     },
     {
-      "date": "22/02/25",
+      date: "22/02/25",
       sessions: [
         {
           time: "13:30",
@@ -143,15 +143,41 @@ const WorkoutLog = () => {
           ]
         }
       ]
+    },
+    {
+      date: "24/02/25",
+      sessions: [
+        {
+          time: "11:00",
+          exercises: [
+            "1x30min boxing",
+            "4x3 bench press 25kg",
+            "2x4 dumbbell press 20kg"
+          ]
+        },
+        {
+          time: "14:30",
+          exercises: [
+            "6x6 bench press 30kg"
+          ]
+        },
+        {
+          time: "16:00",
+          exercises: [
+            "2x8 R/L lunges 8kg - support",
+            "2x8 box jump"
+          ]
+        }
+      ]
     }
   ];
 
-  const [activeDay, setActiveDay] = useState("17/02/2025");
+  const [activeDay, setActiveDay] = useState("24/02/25");
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-4">Workout Log (17-20 Feb 2025)</h1>
+        <h1 className="text-2xl font-bold mb-4">Workout Log (17-24 Feb 2025)</h1>
         <div className="flex space-x-2 mb-6 overflow-x-auto">
           {workouts.map((day) => (
             <button

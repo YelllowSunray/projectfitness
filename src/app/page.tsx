@@ -1,10 +1,11 @@
 import React from 'react';
 
+// Updated stats with previous values and calculated increases
 const stats = [
-  { name: 'BenchPress PR', value: '20KG' },
-  { name: 'Squat PR', value:'30KG' },
-  { name: 'Deadlift PR', value: '60KG' },
-  { name: 'BodyWeight', value: '68KG'}
+  { name: 'BenchPress PR', value: '40KG', previousValue: '30KG', increase: 10 },
+  { name: 'Squat PR', value: '35KG', previousValue: '30KG', increase: 5 },
+  { name: 'Deadlift PR', value: '60KG', previousValue: '60KG', increase: 0 },
+  { name: 'BodyWeight', value: '69KG', previousValue: '68KG', increase: 1 }
 ]
 
 function Home() {
@@ -17,7 +18,7 @@ function Home() {
               Project Samir
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-gray-300">
-            A journey towards fitness goals. Updated last Monday, 17/02/25.
+              A journey towards fitness goals. Updated last Monday, 24/02/25.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
@@ -47,19 +48,34 @@ function Home() {
         </svg>
       </div>
       <div className="bg-gray-900">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.name} className="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">
-              <p className="text-sm/6 font-medium text-gray-400">{stat.name}</p>
-              <p className="mt-2 flex items-baseline gap-x-2">
-                <span className="text-4xl font-semibold tracking-tight text-white">{stat.value}</span>
-              </p>
-            </div>
-          ))}
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat) => (
+              <div key={stat.name} className="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">
+                <p className="text-sm/6 font-medium text-gray-400">{stat.name}</p>
+                <p className="mt-2 flex items-baseline gap-x-2">
+                  <span className="text-4xl font-semibold tracking-tight text-white">{stat.value}</span>
+                  {/* Display increase with appropriate color and symbols instead of Lucide icons */}
+                  <span className={`text-sm font-medium ${
+                    stat.name === 'BodyWeight' 
+                      ? (stat.increase < 0 ? 'text-green-500' : stat.increase > 0 ? 'text-red-500' : 'text-gray-400')
+                      : (stat.increase > 0 ? 'text-green-500' : stat.increase < 0 ? 'text-red-500' : 'text-gray-400')
+                  }`}>
+                    {stat.increase > 0 && '+'}{stat.increase}KG
+                    {stat.increase > 0 ? 
+                      ' ↗' : 
+                      stat.increase < 0 ? 
+                        ' ↘' : 
+                        ''
+                    }
+                  </span>
+                </p>
+                <p className="text-xs text-gray-500 mt-1">Previous: {stat.previousValue}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }
