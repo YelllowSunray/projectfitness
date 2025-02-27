@@ -7,14 +7,21 @@ const GymNotes = () => {
 
   const exercises = [
     {
+      name: "Running (like an Ethiopian)",
+      tips: [
+        "Bounce from the ground",
+        "Take long strides",
+        "Pull the ground away, taking jumpy long strides, proud",
+        "Lean forward?",
+      ]
+    },
+    {
       name: "Bench Press",
       tips: [
         "Tuck elbow 45 degrees",
         "Arc and proud chest, keep shoulders rolled back",
         "Brace abs, take breath in",
-        "Leg drive (Squeeze glutes for added stability)",
-        "Bar path should be slightly diagonal (toward head at bottom, over shoulders at top)",
-        
+        "Leg drive",
         "Lift!"
       ]
     },
@@ -22,13 +29,24 @@ const GymNotes = () => {
       name: "Deadlift",
       tips: [
         "Bring your hands to the bar",
-        "Put butt out, stretch them hamstrings",
-        "Look forward, proud instead of down and slouch",
-        "Engage lats by \"protecting your armpits\"",
-
+        "Put that butt out, stretch them hamstrings",
+        "Look forward and be proud instead of down and slouch",
+        "Drive them legs bro/sis.",
+        "Lift!"
+      ],
+      description: "Totally changes how you go to gym, product: a powerful deadlift and nice feeling in back/legs"
+    },
+    {
+      name: "Flies",
+      tips: [
+        "Roll shoulders back",
+        "Chest out proud",
+        "Stretch arms as if pointing in a cute groom",
+        "Squeeze pecs when weight is on top",
+        "Should you go fully up?",
         "Lift!"
       ]
-    },
+    }
   ];
 
   return (
@@ -59,11 +77,22 @@ const GymNotes = () => {
           {activeExercise !== null ? (
             <>
               <h2 className="text-2xl font-bold mb-4 text-blue-800">{exercises[activeExercise].name}</h2>
+              {exercises[activeExercise].description && (
+                <p className="italic mb-4 text-gray-600">{exercises[activeExercise].description}</p>
+              )}
               <ul className="space-y-2">
                 {exercises[activeExercise].tips.map((tip, idx) => (
                   <li key={idx} className="flex items-start">
                     <span className="mr-2 mt-1 text-blue-600">•</span>
-                    <span>{tip}</span>
+                    <span>
+                      {tip.includes("**") 
+                        ? <span>
+                            {tip.split("**")[0]}
+                            <strong className="font-bold text-blue-800">{tip.split("**")[1]}</strong>
+                            {tip.split("**")[2] || ""}
+                          </span>
+                        : tip}
+                    </span>
                   </li>
                 ))}
               </ul>

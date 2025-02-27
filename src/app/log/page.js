@@ -113,7 +113,7 @@ const WorkoutLog = () => {
       ]
     },
     {
-      date: "21/02/25",
+      date: "21/02/2025",
       sessions: [
         {
           time: "14:30",
@@ -122,22 +122,22 @@ const WorkoutLog = () => {
           ]
         },
         {
-          time: "16;00",
+          time: "16:00",
           exercises: [
-            "5x8 Squat 30KG"
+            "5x8 Squat 30kg"
           ]
         }
       ]
     },
     {
-      date: "22/02/25",
+      date: "22/02/2025",
       sessions: [
         {
           time: "13:30",
           exercises: [
             "4x6 deadlift 60kg",
             "3x8 Dip/pushups assisted -20kg",
-            "1x8 tricep extension ?",
+            "1x8 tricep extension",
             "4x8 Bayesian curl 5kg",
             "3x8 chestfly 15kg"
           ]
@@ -145,7 +145,7 @@ const WorkoutLog = () => {
       ]
     },
     {
-      date: "24/02/25",
+      date: "24/02/2025",
       sessions: [
         {
           time: "11:00",
@@ -169,15 +169,56 @@ const WorkoutLog = () => {
           ]
         }
       ]
+    },
+    {
+      date: "25/02/2025",
+      sessions: [
+        {
+          time: "11:00",
+          exercises: [
+            "3x6 deadlift 50kg",
+            "1x16 L/R Standing cable hamstring"
+          ]
+        },
+        {
+          time: "16:30",
+          exercises: [
+            "3x8 squat 30kg"
+          ]
+        }
+      ]
+    },
+    {
+      date: "26/02/2025",
+      sessions: [
+        {
+          time: "11:15",
+          exercises: [
+            "3x6 bench press 35kg"
+          ]
+        },
+        {
+          time: "14:45",
+          exercises: [
+            "1x6 chest flies 10kg"
+          ]
+        },
+        {
+          time: "16:00",
+          exercises: [
+            "5x3min running"
+          ]
+        }
+      ]
     }
   ];
 
-  const [activeDay, setActiveDay] = useState("24/02/25");
+  const [activeDay, setActiveDay] = useState("26/02/2025");
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-4">Workout Log (17-24 Feb 2025)</h1>
+        <h1 className="text-2xl font-bold mb-4">Workout Log (17-26 Feb 2025)</h1>
         <div className="flex space-x-2 mb-6 overflow-x-auto">
           {workouts.map((day) => (
             <button
