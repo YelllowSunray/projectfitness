@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from 'react';
-import { PlusCircle, CheckCircle, CircleDashed, Sparkles } from 'lucide-react';
 
 const DreamBoard = () => {
   const categories = [
@@ -91,9 +90,9 @@ const DreamBoard = () => {
       <div className="text-center mb-6">
         <h1 className="text-3xl font-bold mb-2 text-gray-800">Chase Dreams</h1>
         <div className="flex items-center justify-center">
-          <Sparkles className="text-yellow-500 mr-2" size={20} />
+          <span className="text-yellow-500 mr-2">✨</span>
           <p className="text-lg font-medium text-gray-600">Focus on creating some value</p>
-          <Sparkles className="text-yellow-500 ml-2" size={20} />
+          <span className="text-yellow-500 ml-2">✨</span>
         </div>
       </div>
 
@@ -134,9 +133,9 @@ const DreamBoard = () => {
                     onClick={() => toggleDream(dream)}
                   >
                     {completedDreams.includes(dream) ? (
-                      <CheckCircle className="text-green-500 mt-0.5 flex-shrink-0" size={20} />
+                      <span className="text-green-500 mt-0.5 flex-shrink-0">✓</span>
                     ) : (
-                      <CircleDashed className="text-gray-400 mt-0.5 flex-shrink-0" size={20} />
+                      <span className="text-gray-400 mt-0.5 flex-shrink-0">○</span>
                     )}
                     <span className={`${completedDreams.includes(dream) ? 'line-through text-gray-400' : 'text-gray-700'}`}>
                       {dream}
