@@ -11,7 +11,7 @@ const DreamBoard = () => {
       dreams: [
         "Move back to London",
         "Watch Champions League in London",
-        "Visit Koko again",
+        "Visit KOKO again",
         "Travel to Vietnam",
         "Drink Vietnamese red bull",
         "Travel to Morocco and make msemen",

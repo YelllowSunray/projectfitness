@@ -18,7 +18,7 @@ function Home() {
               Project Samir
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-gray-300">
-              A journey towards fitness goals. Updated last Monday, 24/02/25.
+              A journey towards fitness. Updated last Monday, 24/02/25.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
@@ -75,6 +75,23 @@ function Home() {
             ))}
           </div>
         </div>
+      </div>
+      <div>
+      <div className="bg-gray-800 py-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Philosophy</h2>
+            <div className="mt-8 text-lg text-gray-300">
+              <p className="mb-4">
+                Good gym form changes your posture like adding wd-40 for your joints.
+              </p>
+              <p>
+                Persue your fascinations, instead of delaying your dreams. I struggle with exploring life, and tend to choose the safe option, instead of daring to live. Live like you are young, not old. Have a cool life. Go on hikes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     </>
   );
