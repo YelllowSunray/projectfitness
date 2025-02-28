@@ -16,6 +16,7 @@ const navigation = [
     { name: 'Photos', href: '/photos' },
     { name: 'Blog', href: '/blog' },
     { name: 'Form', href: '/form' },
+    { name: 'Dreams', href: '/dreams' }
 ]
 
 const Menu = () => {
