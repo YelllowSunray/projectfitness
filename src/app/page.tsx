@@ -1,100 +1,115 @@
-import React from 'react';
+"use client"
 
-// Updated stats with previous values and calculated increases
-const stats = [
-  { name: 'BenchPress PR', value: '40KG', previousValue: '30KG', increase: 10 },
-  { name: 'Squat PR', value: '35KG', previousValue: '30KG', increase: 5 },
-  { name: 'Deadlift PR', value: '60KG', previousValue: '60KG', increase: 0 },
-  { name: 'BodyWeight', value: '69KG', previousValue: '68KG', increase: 1 }
-];
+import React, { useState } from 'react';
 
-function Home() {
+const DreamsVisionBoard = () => {
+  const [expandedSection, setExpandedSection] = useState(null);
+  
+  const dreamSections = [
+    {
+      id: "section1",
+      content: "Get drunk again? Go a pub. Take shots? Lots of shots. Kiss? Move back to London. Use Nos again? watch champions league there. Graduate uni ! Get drunk again. Hungover in a different 🌆. Nos, Go on the tube again. Dancing @ KOKO again. Spooky Halloween.🎃 left over pizza in morning. Have friends to call. Drunk."
+    },
+    {
+      id: "section2",
+      content: "Make robots to make streets clean again. Robot engineering? Would love to make things. Figure out how to make circuit."
+    },
+    {
+      id: "section3",
+      content: "Join footbal team. Travel to New York and work for restaurants. Run away from parents, make a living somewhere."
+    },
+    {
+      id: "section4",
+      content: "Graduate uni ! train calithetics swimming and UFC. Make a statue, a park for Mom's dog. Workout everyday. Calithenics and swimming. Take a punch."
+    },
+    {
+      id: "section5",
+      content: "Pay back debts to people. Give a beautiful message to mom. Buy Mom her porsche. Clean Utrecht and graffiti."
+    },
+    {
+      id: "section6",
+      content: "Getting really high and seeing sky 🌌 Blackrock stuff."
+    },
+    {
+      id: "section7",
+      content: "Make nights cooking/dishwashing. Become ucu chef, work dishwashing nights. Make dosa in Hilversum (mag)"
+    },
+    {
+      id: "section8",
+      content: "Travel to Vietnam. Meet new people. Drink Vietnamese red bull. run away from papa, and make a restaurant somewhere, send 90% money back. Travel to Morrocco and make msemen. Make a Pickup Truck converted to Van, and van life Colorado Ski resorts bum. go to Bali again island life. travel to New York and work for illegal restaurants."
+    },
+    {
+      id: "section9",
+      content: "Give Mala a complete vacation, to all best locations."
+    }
+  ];
+  
+  const toggleSection = (id) => {
+    if (expandedSection === id) {
+      setExpandedSection(null);
+    } else {
+      setExpandedSection(id);
+    }
+  };
+  
+  const getRandomGradient = (id) => {
+    const gradients = [
+      'from-blue-500 to-purple-500',
+      'from-green-500 to-blue-500',
+      'from-yellow-500 to-red-500',
+      'from-indigo-500 to-pink-500',
+      'from-purple-500 to-red-500',
+      'from-green-500 to-yellow-500',
+      'from-red-500 to-blue-500',
+      'from-pink-500 to-orange-500',
+      'from-teal-500 to-indigo-500'
+    ];
+    
+    // Get consistent color based on id
+    const index = id.charCodeAt(id.length - 1) % gradients.length;
+    return gradients[index];
+  };
+  
   return (
-    <>
-      <div className="relative isolate overflow-hidden bg-gray-900">
-        <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              Project Samir
-            </h2>
-            <p className="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-gray-300">
-              A journey towards fitness. Updated last Monday, 24/02/25.
-            </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="/log"
-                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                Lifting History
-              </a>
-              <a href="/forum" className="text-sm/6 font-semibold text-white">
-                Collaborate <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <svg
-          viewBox="0 0 1024 1024"
-          aria-hidden="true"
-          className="absolute left-1/2 top-1/2 -z-10 size-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]"
-        >
-          <circle r={512} cx={512} cy={512} fill="url(#8d958450-c69f-4251-94bc-4e091a323369)" fillOpacity="0.7" />
-          <defs>
-            <radialGradient id="8d958450-c69f-4251-94bc-4e091a323369">
-              <stop stopColor="#7775D6" />
-              <stop offset={1} stopColor="#E935C1" />
-            </radialGradient>
-          </defs>
-        </svg>
-      </div>
-      <div className="bg-gray-900 ">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.name} className="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">
-                <p className="text-sm/6 font-medium text-gray-400">{stat.name}</p>
-                <p className="mt-2 flex items-baseline gap-x-2">
-                  <span className="text-4xl font-semibold tracking-tight text-white">{stat.value}</span>
-                  {/* Fixed color logic for weight gain/loss */}
-                  <span className={`text-sm font-medium ${
-                    stat.name === 'BodyWeight' 
-                      ? (stat.increase > 0 ? 'text-green-500' : stat.increase < 0 ? 'text-red-500' : 'text-gray-400')
-                      : (stat.increase > 0 ? 'text-green-500' : stat.increase < 0 ? 'text-red-500' : 'text-gray-400')
-                  }`}>
-                    {stat.increase > 0 && '+'}{stat.increase}KG
-                    {stat.increase > 0 ? 
-                      ' ↗' : 
-                      stat.increase < 0 ? 
-                        ' ↘' : 
-                        ''
-                    }
-                  </span>
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">Chase Dreams</h1>
+        
+        <div className="space-y-4">
+          {dreamSections.map((section) => (
+            <div 
+              key={section.id}
+              className={`bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-300 ${expandedSection === section.id ? 'transform scale-102' : ''}`}
+              onClick={() => toggleSection(section.id)}
+            >
+              <div className={`h-2 bg-gradient-to-r ${getRandomGradient(section.id)}`}></div>
+              <div className="p-6">
+                <p className={`text-gray-800 leading-relaxed ${expandedSection === section.id ? 'text-lg' : 'text-base line-clamp-2'}`}>
+                  {section.content}
                 </p>
-                <p className="text-xs text-gray-500 mt-1">Previous: {stat.previousValue}</p>
+                
+                {expandedSection === section.id && (
+                  <div className="mt-4 flex justify-end">
+                    <span className="text-sm text-gray-500 italic">Click to collapse</span>
+                  </div>
+                )}
+                
+                {expandedSection !== section.id && section.content.length > 100 && (
+                  <div className="mt-2 flex justify-end">
+                    <span className="text-sm text-blue-500">Read more...</span>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div>
-      <div className="bg-gray-800 py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Philosophy</h2>
-            <div className="mt-8 text-lg text-gray-300">
-              <p className="mb-4">
-                Good gym form changes your posture like adding wd-40 for your joints.
-              </p>
-              <p>
-                Persue your fascinations, instead of delaying your dreams. I struggle with exploring life, and tend to choose the safe option, instead of daring to live. Live like you are young, not old. Have a cool life. Go on hikes.
-              </p>
             </div>
-          </div>
+          ))}
+        </div>
+        
+        <div className="mt-8 text-center">
+          <p className="text-gray-600 italic">Click on any dream to expand it.</p>
         </div>
       </div>
-      </div>
-    </>
+    </div>
   );
-}
+};
 
-export default Home;
+export default DreamsVisionBoard;
