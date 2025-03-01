@@ -66,9 +66,7 @@ const DreamBoard = () => {
         "Go to a pub",
         "Take shots",
         "Kiss someone special",
-        "Experience being hungover in a different city",
         "Go on the tube again",
-        "Get really high and see the sky",
         "Blackrock stuff"
       ]
     }
