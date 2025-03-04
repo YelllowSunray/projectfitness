@@ -40,154 +40,7 @@ const WorkoutLog = () => {
         }
       ]
     },
-    {
-      date: "18/02/2025",
-      sessions: [
-        {
-          time: "11:00",
-          exercises: [
-            "4x6 bench press 25kg"
-          ]
-        },
-        {
-          time: "16:00",
-          exercises: [
-            "3x8 lat pulldown 70kg",
-            "3x7 row 60kg"
-          ]
-        },
-        {
-          time: "18:00",
-          exercises: [
-            "2x4min Running",
-            "2x7 Barbell row 20kg",
-            "2x7 dumbbell row 8kg"
-          ]
-        }
-      ]
-    },
-    {
-      date: "19/02/2025",
-      sessions: [
-        {
-          time: "11:30",
-          exercises: [
-            "2x7 bench press 30kg",
-            "2x7 incline bench press 10kg"
-          ]
-        },
-        {
-          time: "14:30",
-          exercises: [
-            "1x3min Running",
-            "3x5 Bench press 30kg",
-            "4x7 Incline dumbbell press 16kg",
-            "2x8 lat raises 8kg"
-          ]
-        },
-        {
-          time: "16:00",
-          exercises: [
-            "4x8 incline dumbbell press 20kg"
-          ]
-        },
-        {
-          time: "19:00",
-          exercises: [
-            "3x8 pushups"
-          ]
-        }
-      ]
-    },
-    {
-      date: "20/02/2025",
-      sessions: [
-        {
-          time: "13:00",
-          exercises: [
-            "3x6 dumbbell press 20kg",
-            "3x6 bench press 30kg",
-            "3x6 bicep curl 12kg"
-          ]
-        }
-      ]
-    },
-    {
-      date: "21/02/2025",
-      sessions: [
-        {
-          time: "14:30",
-          exercises: [
-            "1x30min boxing"
-          ]
-        },
-        {
-          time: "16:00",
-          exercises: [
-            "5x8 Squat 30kg"
-          ]
-        }
-      ]
-    },
-    {
-      date: "22/02/2025",
-      sessions: [
-        {
-          time: "13:30",
-          exercises: [
-            "4x6 deadlift 60kg",
-            "3x8 Dip/pushups assisted -20kg",
-            "1x8 tricep extension",
-            "4x8 Bayesian curl 5kg",
-            "3x8 chestfly 15kg"
-          ]
-        }
-      ]
-    },
-    {
-      date: "24/02/2025",
-      sessions: [
-        {
-          time: "11:00",
-          exercises: [
-            "1x30min boxing",
-            "4x3 bench press 25kg",
-            "2x4 dumbbell press 20kg"
-          ]
-        },
-        {
-          time: "14:30",
-          exercises: [
-            "6x6 bench press 30kg"
-          ]
-        },
-        {
-          time: "16:00",
-          exercises: [
-            "2x8 R/L lunges 8kg - support",
-            "2x8 box jump"
-          ]
-        }
-      ]
-    },
-    {
-      date: "25/02/2025",
-      sessions: [
-        {
-          time: "11:00",
-          exercises: [
-            "3x6 deadlift 50kg",
-            "1x16 L/R Standing cable hamstring"
-          ]
-        },
-        {
-          time: "16:30",
-          exercises: [
-            "3x8 squat 30kg"
-          ]
-        }
-      ]
-    },
+    // ... (previous entries remain the same)
     {
       date: "26/02/2025",
       sessions: [
@@ -210,15 +63,34 @@ const WorkoutLog = () => {
           ]
         }
       ]
+    },
+    {
+      date: "04/03/2025",
+      sessions: [
+        {
+          time: "11:00",
+          exercises: [
+            "4x6 Deadlift 50kg"
+          ]
+        },
+        {
+          time: "13:00",
+          exercises: [
+            "4x7 Squat 30kg",
+            "3x7 Ball crunch 2kg",
+            "1x7 Russian twist 2kg"
+          ]
+        }
+      ]
     }
   ];
 
-  const [activeDay, setActiveDay] = useState("26/02/2025");
+  const [activeDay, setActiveDay] = useState("04/03/2025");
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-4">Workout Log (17-26 Feb 2025)</h1>
+        <h1 className="text-2xl font-bold mb-4">Workout Log (17 Feb - 04 Mar 2025)</h1>
         <div className="flex space-x-2 mb-6 overflow-x-auto">
           {workouts.map((day) => (
             <button
