@@ -267,6 +267,12 @@ const WorkoutLog = () => {
             "3x7 Ball crunch 2kg",
             "1x7 Russian twist 2kg"
           ]
+        },
+        {
+          time: "18:00",
+          exercises: [
+            "10x8 Bench Press 30kg"
+          ]
         }
       ]
     }

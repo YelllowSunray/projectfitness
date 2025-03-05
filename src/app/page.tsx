@@ -86,12 +86,57 @@ function Home() {
                 Good gym form changes your posture like adding wd-40 for your joints.
               </p>
               <p>
-                Persue your fascinations, instead of delaying your dreams. I struggle with exploring life, and tend to choose the safe option, instead of daring to live. Live like you are young, not old. Have a cool life. Go on hikes.
+                Persue your fascinations. Live like you are young. Have a cool life. Go on hikes.
               </p>
             </div>
           </div>
         </div>
       </div>
+
+      <div>
+
+      </div> 
+
+        <div className="h-screen w-screen">
+          <img 
+            src="/Plots/download.png" 
+            alt="Workout Progression Charts" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="h-screen w-screen">
+          <img 
+            src="/Plots/download-1.png" 
+            alt="Workout Progression Charts" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="h-screen w-screen">
+          <img 
+            src="/Plots/download-2.png" 
+            alt="Workout Progression Charts" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="h-screen w-screen">
+          <img 
+            src="/Plots/download-3.png" 
+            alt="Workout Progression Charts" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="h-screen w-screen">
+          <img 
+            src="/Plots/download-4.png" 
+            alt="Workout Progression Charts" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+
       </div>
     </>
   );
