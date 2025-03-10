@@ -18,7 +18,7 @@ function Home() {
               Project Samir
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-gray-300">
-              A journey towards fitness. Updated last Monday, 24/02/25.
+              A journey towards fitness. Updated last Monday, 10/03/25.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a

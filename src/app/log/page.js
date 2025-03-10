@@ -275,6 +275,31 @@ const WorkoutLog = () => {
           ]
         }
       ]
+    },
+    {
+      date: "07/03/2025",
+      sessions: [
+        {
+          time: "11:15",
+          exercises: [
+            "1x8 Chest Flies 12kg",
+            "3x8 Barbell Row 20kg",
+          ]
+        },
+        {
+          time: "14:30",
+          exercises: [
+            "3x8 Bicep Curl 14kg",
+            "3x15 Front/Side Raises 4kg",
+          ]
+        },
+        {
+          time: "16:00",
+          exercises: [
+            "6x8 Squat Press 30kg",
+          ]
+        }
+      ]
     }
   ];
 
