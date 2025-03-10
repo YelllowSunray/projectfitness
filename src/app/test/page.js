@@ -24,7 +24,7 @@ const workoutData = {
 const Chart = ({ title, data, lines, yLabel }) => (
   <div>
     <h2>{title}</h2>
-    <LineChart width={600} height={300} data={data} margin={{ top: 10, right: 30, left: 0, bottom: 10 }}>
+    <LineChart width={800} height={600} data={data} margin={{ top: 10, right: 30, left: 0, bottom: 10 }}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date" />
       <YAxis label={{ value: yLabel, angle: -90, position: "insideLeft" }} />

@@ -1,4 +1,6 @@
 import React from 'react';
+import WorkoutVolumeChart from './components/graphs/graphs';
+import MaxWeightChart from './components/graphs/graphs2';
 
 // Updated stats with previous values and calculated increases
 const stats = [
@@ -94,48 +96,12 @@ function Home() {
       </div>
 
       <div>
-
+        <div className="flex flex-col items-center justify-center space-y-8 py-8">
+          <WorkoutVolumeChart />
+          <MaxWeightChart />
+        </div>
       </div> 
 
-        <div className="h-screen w-screen">
-          <img 
-            src="/Plots/download.png" 
-            alt="Workout Progression Charts" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        <div className="h-screen w-screen">
-          <img 
-            src="/Plots/download-1.png" 
-            alt="Workout Progression Charts" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        <div className="h-screen w-screen">
-          <img 
-            src="/Plots/download-2.png" 
-            alt="Workout Progression Charts" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        <div className="h-screen w-screen">
-          <img 
-            src="/Plots/download-3.png" 
-            alt="Workout Progression Charts" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        <div className="h-screen w-screen">
-          <img 
-            src="/Plots/download-4.png" 
-            alt="Workout Progression Charts" 
-            className="w-full h-full object-cover"
-          />
-        </div>
 
       </div>
     </>
