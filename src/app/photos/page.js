@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 const ProgressPhotos = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -57,9 +58,11 @@ const ProgressPhotos = () => {
               className="aspect-[3/4] relative cursor-pointer transition-transform hover:scale-[1.02]"
               onClick={() => setSelectedPhoto(photo)}
             >
-              <img
+              <Image
                 src={photo.path}
                 alt={`${photo.type.toLowerCase()} view`}
+                width={800}
+                height={1067}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -107,9 +110,11 @@ const ProgressPhotos = () => {
           onClick={() => setSelectedPhoto(null)}
         >
           <div className="max-w-4xl w-full max-h-[90vh] bg-white rounded-lg overflow-hidden">
-            <img
+            <Image
               src={selectedPhoto.path}
               alt={`${selectedPhoto.type.toLowerCase()} view full size`}
+              width={1200}
+              height={1600}
               className="w-full h-full object-contain"
             />
           </div>
