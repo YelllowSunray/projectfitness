@@ -2,8 +2,7 @@
 
 "use client";
 
-import { useMemo } from "react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   ScatterChart,
   Scatter,
@@ -16,19 +15,27 @@ import {
   Line,
   ComposedChart,
 } from "recharts";
-import { parse, format, isValid } from "date-fns"; // Import `isValid`
+import { parse, format, isValid } from "date-fns";
 import { getWorkoutData } from "lib/googleSheets";
 
 const WorkoutVisualization = () => {
   const [workoutData, setWorkoutData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const data = await getWorkoutData();
+        console.log('Fetched data:', data);
         setWorkoutData(data);
+        setError(null);
       } catch (error) {
         console.error("Failed to fetch workout data", error);
+        setError(error.message || "Failed to fetch workout data");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -37,12 +44,24 @@ const WorkoutVisualization = () => {
 
   // Process the raw data
   const processedData = useMemo(() => {
-    if (!workoutData.length) return { liftProgression: {}, volumeData: [] };
+    if (!workoutData || !workoutData.length) {
+      console.log('No workout data to process');
+      return { liftProgression: {}, volumeData: [] };
+    }
 
-    const rows =
-      workoutData.length > 0 && workoutData[0][0] === "DateTime"
-        ? workoutData.slice(1)
-        : workoutData;
+    console.log('Processing workout data:', workoutData);
+
+    // Ensure we have headers and data rows
+    const rows = workoutData.length > 0 && workoutData[0][0] === "DateTime" 
+      ? workoutData.slice(1) 
+      : workoutData;
+
+    if (!rows.length) {
+      console.log('No rows to process after filtering');
+      return { liftProgression: {}, volumeData: [] };
+    }
+
+    console.log('Processing rows:', rows);
 
     const liftProgression = {
       deadlift: [],
@@ -54,26 +73,41 @@ const WorkoutVisualization = () => {
     const volumeByDay = {};
 
     rows.forEach((row) => {
+      // Make sure the row has expected data
+      if (!row || row.length < 5) {
+        console.warn('Skipping invalid row:', row);
+        return;
+      }
+
       const [dateStr, timeStr, exercise, setsxReps, weightOrAssist] = row;
 
       // Ensure dateStr is defined before parsing
       if (!dateStr) {
-        console.error(`Missing date for row: ${row}`);
+        console.warn(`Missing date for row: ${row}`);
         return;
       }
 
-      // Check if the date is valid before parsing
-      const parsedDate = parse(dateStr, "dd/MM/yyyy", new Date());
+      let parsedDate;
+      try {
+        // Try parsing with dd/MM/yyyy format
+        parsedDate = parse(dateStr, "dd/MM/yyyy", new Date());
+        
+        // If invalid, try MM/dd/yyyy format
+        if (!isValid(parsedDate)) {
+          parsedDate = parse(dateStr, "MM/dd/yyyy", new Date());
+        }
+      } catch (e) {
+        console.warn(`Error parsing date ${dateStr}:`, e);
+        return;
+      }
 
-      // If parsed date is invalid, log the error and skip the row
+      // If parsed date is still invalid, skip the row
       if (!isValid(parsedDate)) {
-        console.error(`Invalid date format for row: ${row}`);
+        console.warn(`Invalid date format for: ${dateStr}`);
         return;
       }
 
       const formattedDate = format(parsedDate, "yyyy-MM-dd");
-
-      // Convert to timestamp for sorting/graphing
       const timestamp = new Date(formattedDate).getTime();
 
       // Extract numeric weight
@@ -85,6 +119,7 @@ const WorkoutVisualization = () => {
 
       // Parse sets and reps
       const parseSetsReps = (setsxReps) => {
+        if (!setsxReps) return { sets: 0, reps: 0 };
         const match = setsxReps.match(/(\d+)x(\d+)/);
         return match
           ? { sets: parseInt(match[1]), reps: parseInt(match[2]) }
@@ -96,24 +131,29 @@ const WorkoutVisualization = () => {
       const { sets, reps } = parseSetsReps(setsxReps);
       const volume = weight * sets * reps;
 
+      if (volume <= 0) {
+        console.log(`Skipping zero volume for ${exercise} on ${formattedDate}`);
+        return;
+      }
+
       // Categorize lifts
-      if (exercise.toLowerCase().includes("deadlift")) {
+      if (exercise && exercise.toLowerCase().includes("deadlift")) {
         liftProgression.deadlift.push({
-          date: timestamp, // Use timestamp for sorting
+          date: timestamp,
           weight,
           volume,
         });
       }
-      if (exercise.toLowerCase().includes("bench press")) {
+      if (exercise && exercise.toLowerCase().includes("bench press")) {
         liftProgression.benchPress.push({
-          date: timestamp, // Use timestamp for sorting
+          date: timestamp,
           weight,
           volume,
         });
       }
-      if (exercise.toLowerCase().includes("squat")) {
+      if (exercise && exercise.toLowerCase().includes("squat")) {
         liftProgression.squat.push({
-          date: timestamp, // Use timestamp for sorting
+          date: timestamp,
           weight,
           volume,
         });
@@ -126,17 +166,27 @@ const WorkoutVisualization = () => {
     // Convert volume by day to array for plotting
     const volumeData = Object.entries(volumeByDay)
       .map(([date, volume]) => ({
-        date: new Date(date).getTime(), // Convert date to timestamp
+        date: new Date(date).getTime(),
         volume,
       }))
       .sort((a, b) => a.date - b.date);
 
+    console.log('Processed lift progression:', liftProgression);
+    console.log('Processed volume data:', volumeData);
+
     return { liftProgression, volumeData };
   }, [workoutData]);
 
-  // Render only if data is available
-  if (workoutData.length === 0) {
-    return <div>Loading workout data...</div>;
+  if (loading) {
+    return <div className="text-center p-4">Loading workout data...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center p-4 text-red-500">Error: {error}</div>;
+  }
+
+  if (!workoutData || workoutData.length === 0) {
+    return <div className="text-center p-4">No workout data available</div>;
   }
 
   return (
@@ -148,13 +198,17 @@ const WorkoutVisualization = () => {
             <CartesianGrid />
             <XAxis
               dataKey="date"
-              type="number" // Use number for timestamp
+              type="number"
               name="Date"
               domain={["dataMin", "dataMax"]}
               tickFormatter={(timestamp) => format(new Date(timestamp), "yyyy-MM-dd")}
             />
             <YAxis dataKey="weight" type="number" name="Weight (kg)" />
-            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+            <Tooltip 
+              cursor={{ strokeDasharray: "3 3" }}
+              formatter={(value, name) => [value, name === "weight" ? "Weight (kg)" : name]}
+              labelFormatter={(timestamp) => format(new Date(timestamp), "yyyy-MM-dd")}
+            />
             <Legend />
             <Scatter
               name="Deadlift"
@@ -171,7 +225,6 @@ const WorkoutVisualization = () => {
               data={processedData.liftProgression.squat}
               fill="#ffc658"
             />
-            {/* Plot the curves as Lines for each lift */}
             <Line
               type="monotone"
               data={processedData.liftProgression.deadlift}
@@ -213,10 +266,19 @@ const WorkoutVisualization = () => {
               tickFormatter={(timestamp) => format(new Date(timestamp), "yyyy-MM-dd")}
             />
             <YAxis label={{ value: "Volume (kg)", angle: -90, position: "insideLeft" }} />
-            <Tooltip />
+            <Tooltip
+              formatter={(value) => [`${value} kg`, "Volume"]}
+              labelFormatter={(timestamp) => format(new Date(timestamp), "yyyy-MM-dd")}
+            />
             <Legend />
             <Scatter dataKey="volume" fill="#8884d8" name="Daily Volume" />
-            <Line type="monotone" dataKey="volume" stroke="#82ca9d" name="Trend Line" dot={false} />
+            <Line 
+              type="monotone" 
+              dataKey="volume" 
+              stroke="#82ca9d" 
+              name="Trend Line" 
+              dot={false} 
+            />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
