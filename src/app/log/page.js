@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React from 'react';
 import WorkoutLog from "../components/WorkoutLog.js";
 
 export default function Home() {

@@ -1,3 +1,5 @@
+// components/graphs/graphs3.js
+
 "use client";
 
 import { useMemo } from "react";
@@ -53,6 +55,12 @@ const WorkoutVisualization = () => {
 
     rows.forEach((row) => {
       const [dateStr, timeStr, exercise, setsxReps, weightOrAssist] = row;
+
+      // Ensure dateStr is defined before parsing
+      if (!dateStr) {
+        console.error(`Missing date for row: ${row}`);
+        return;
+      }
 
       // Check if the date is valid before parsing
       const parsedDate = parse(dateStr, "dd/MM/yyyy", new Date());
