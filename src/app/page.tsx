@@ -1,7 +1,7 @@
 import React from 'react';
 import WorkoutVolumeChart from './components/graphs/graphs';
 import MaxWeightChart from './components/graphs/graphs2';
-
+import WorkoutGraph from './components/graphs/graphs3';
 // Updated stats with previous values and calculated increases
 const stats = [
   { name: 'BenchPress PR', value: '40KG', previousValue: '30KG', increase: 10 },
@@ -97,8 +97,7 @@ function Home() {
 
       <div>
         <div className="flex flex-col items-center justify-center space-y-8 py-8">
-          <WorkoutVolumeChart />
-          <MaxWeightChart />
+          <WorkoutGraph />
         </div>
       </div> 
 
