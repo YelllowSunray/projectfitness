@@ -1,5 +1,3 @@
-import { NextResponse } from 'next/server';
-
 export async function GET() {
     try {
         const SHEET_ID = "1HGgOSGOcFKdr4GrNHb_ftJSIEH8Vp1RYn2EKiDDGOi8"; // Replace with your Google Sheet ID

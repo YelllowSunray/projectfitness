@@ -79,7 +79,7 @@ const WorkoutVisualization = () => {
         return;
       }
 
-      const [dateStr, timeStr, exercise, setsxReps, weightOrAssist] = row;
+      const [dateStr, exercise, setsxReps, weightOrAssist] = row;
 
       // Ensure dateStr is defined before parsing
       if (!dateStr) {
