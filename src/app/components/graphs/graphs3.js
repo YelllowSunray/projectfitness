@@ -4,7 +4,6 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import {
-  ScatterChart,
   Scatter,
   XAxis,
   YAxis,
@@ -231,10 +230,6 @@ const WorkoutVisualization = () => {
     </div>
   );
 
-  // Check if we have data for each chart
-  const hasLiftData = processedData.liftProgression.deadlift.length > 0 || 
-                     processedData.liftProgression.benchPress.length > 0 || 
-                     processedData.liftProgression.squat.length > 0;
                      
   const hasVolumeData = processedData.volumeData.length > 0;
 
